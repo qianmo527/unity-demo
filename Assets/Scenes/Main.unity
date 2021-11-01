@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1345049493}
-  smooth: 0.3
+  smooth: 2
   animator: {fileID: 519420033}
 --- !u!20 &519420031
 Camera:
@@ -559,7 +559,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0
@@ -683,16 +683,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1345049489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e7bb48e25abd1d44bfd2efe2157e69c, type: 3}
+  m_Script: {fileID: 11500000, guid: 76a802ae738a00b418f13523fdb0850c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heroName: Aryan
   speed: 5
-  jumpSpeed: 7
-  doublejumpSpeed: 7
-  isGround: 0
-  rigidbody2d: {fileID: 1345049491}
-  myFeet: {fileID: 1345049495}
-  animator: {fileID: 1345049490}
+  jumpForce: 15
+  isGrounded: 0
+  rigidbody2d: {fileID: 0}
+  myFeet: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!1 &1417468529
 GameObject:
   m_ObjectHideFlags: 0
