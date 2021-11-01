@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public abstract class Player : MonoBehaviour
 {
     public float speed;
-    public float jumpSpeed;
-    public float doublejumpSpeed;
-    public bool isGround;
+    public float jumpForce = 7;
+    public bool isGrounded;
     private bool canDoubleJump;
 
     public Rigidbody2D rigidbody2d;
@@ -32,7 +31,7 @@ public class Player : MonoBehaviour
     }
 
     void CheckGrounded() {
-        isGround = myFeet.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        isGrounded = myFeet.IsTouchingLayers(LayerMask.GetMask("Ground"));
     }
 
     void Flip() {
@@ -55,16 +54,6 @@ public class Player : MonoBehaviour
     }
 
     void Jump() {
-        if (Input.GetButtonDown("Jump") && isGround) {
-            Vector2 jumpVel = new Vector2(0.0f, jumpSpeed);
-            rigidbody2d.velocity = Vector2.up * jumpVel;
-            canDoubleJump = true;
-        }else if(Input.GetButtonDown("Jump") && !isGround) {
-            if (canDoubleJump) {
-                Vector2 doublejumpVel = new Vector2(0.0f, doublejumpSpeed);
-                rigidbody2d.velocity = Vector2.up * doublejumpVel;
-                canDoubleJump = false;
-            }
-        }
+        
     }
 }
