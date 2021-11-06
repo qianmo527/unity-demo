@@ -13,7 +13,6 @@ public class Aryan : Player
     protected override void Update()
     {
         base.Update();
-        CheckGrounded();
         animator.SetFloat("y", rigidbody2d.velocity.y);
     }
 

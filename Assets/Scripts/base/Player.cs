@@ -4,6 +4,12 @@ using UnityEngine;
 
 public abstract class Player : MonoBehaviour
 {
+
+    public Rigidbody2D rigidbody2d;
+    public BoxCollider2D myFeet;
+    public Animator animator;
+    
+    [Header("Settings")]
     public string heroName;
     public float speed;
     public float jumpForce = 15;
@@ -11,12 +17,12 @@ public abstract class Player : MonoBehaviour
     public int maxJumpTime = 2;
     public int jumpTime;
 
-    public Rigidbody2D rigidbody2d;
-    public BoxCollider2D myFeet;
-    public Animator animator;
-
     protected virtual void Awake() {
         Init();
+        if (myFeet == null) {
+            Debug.LogWarning("未加载脚部碰撞器 检测将不会触发");
+        }
+        Application.targetFrameRate = 90;
     }
 
     // Start is called before the first frame update
@@ -44,8 +50,6 @@ public abstract class Player : MonoBehaviour
     protected virtual void CheckGrounded() {
         if (myFeet != null)
             isGrounded = myFeet.IsTouchingLayers(LayerMask.GetMask("Ground"));
-        else
-            Debug.LogWarning("未加载脚部碰撞器 检测将不会触发");
     }
 
     // 翻转人物贴图
@@ -71,6 +75,7 @@ public abstract class Player : MonoBehaviour
         // 检测跳跃状态
         if (Input.GetButtonDown("Jump") && (isGrounded || jumpTime>0)) {
             if (jumpTime>0) {
+                rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, rigidbody2d.velocity.y*0.1f);
                 rigidbody2d.AddForce(jumpForce*Vector2.up, ForceMode2D.Impulse);
                 jumpTime -= 1;
                 isGrounded = false;
@@ -78,8 +83,10 @@ public abstract class Player : MonoBehaviour
             }
         }else if (isGrounded && jumpTime != maxJumpTime) {
             jumpTime = maxJumpTime;
+        }else {
+            CheckGrounded();
         }
-        // TODO 修改多重跳问题 解决velocity不为零bug
+        //TODO 增加双击起飞特性
     }
 
     protected virtual void Attack() {}

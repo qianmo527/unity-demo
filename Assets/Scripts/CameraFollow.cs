@@ -22,22 +22,20 @@ public class CameraFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (target != null) {
+            Vector3 position = new Vector3(target.position.x, target.position.y, -10);
+            transform.position = Vector3.Lerp(transform.position, position, Time.deltaTime*smooth);
+        }
     }
 
     void LateUpdate() {
-        if (target != null) {
-            if (transform.position != target.position) {
-                Vector3 position = new Vector3(target.position.x, target.position.y, -10);
-                transform.position = Vector3.Lerp(transform.position, position, smooth);
-            }
-        }
+        
     }
 
     [Obsolete("Not recommended method", false)]
