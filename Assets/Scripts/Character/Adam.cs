@@ -50,6 +50,9 @@ public class Adam : Player
 
     private void Defend() {
         animator.SetBool("isDefending", Input.GetButton("Defend"));
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Defend")) {
+            speed = 1.5f;
+        }else speed = 5;
     }
 
     public void Sit() {
